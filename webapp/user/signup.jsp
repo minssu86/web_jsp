@@ -162,6 +162,12 @@
                 console.log("??");
                 let isPasswordSame = $('#signup-pw').val() == $('#signup-check').val;
                 switch (false){
+                    case checkPassword :
+                        alert("패스워드 확인 필요")
+                        return;
+                    case checkNickname :
+                        alert("닉네임 확인 필요")
+                        return;
                     case isCheckedId :
                         alert("아이디 중복 체크 필요")
                         return;
@@ -175,12 +181,31 @@
                         alert("비밀번호 확인 필요")
                         return;
                 }
-                console.log("ok");
+                
+                let formData = {
+                    "id" : $('#signup-id').val(),
+                    "password" : $('#signup-pw').val(),
+                    "name" : $('#signup-name').val(),
+                    "nickname" : $('#signup-nickname').val(),
+                    "email" : $('#signup-email').val(),
+                }
+                console.log('!!!')
+                $.ajax({
+                    url : '../v1/user/signup',
+                    type : 'post',
+                    data : formData,
+                    contentType : 'application/json',
+                    success : function(data){
+                        console.log("!!!")
+                        alert("이메일을 통해 가입 절차를 완료하세요!");
+                        location.href('./login.jsp');
+                    },
+                    error : function(e){
+                        console.log(e);
+                    }
+                });
             }); 
-            
         });
-
-     
 
     </script>
 </head>

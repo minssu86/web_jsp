@@ -15,6 +15,13 @@ public class UserRequestDto {
 	private String checkCode;
 
 
+	@Override
+	public String toString() {
+		return "UserRequestDto [userSeq=" + userSeq + ", userId=" + userId + ", userPassword=" + userPassword
+				+ ", userName=" + userName + ", userNickname=" + userNickname + ", userEmail=" + userEmail
+				+ ", createdAt=" + createdAt + ", userProfile=" + userProfile + ", checkCode=" + checkCode + "]";
+	}
+
 	public String getCheckCode() {
 		return checkCode;
 	}

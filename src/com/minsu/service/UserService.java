@@ -5,23 +5,29 @@ import com.minsu.dto.ResponseDto;
 import com.minsu.dto.ResponseStatus;
 import com.minsu.dto.UserRequestDto;
 import com.minsu.dto.UserResponseDto;
+import com.minsu.util.EmailConfirmTokenSender;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class UserService {
     public static Map<String, UserResponseDto> idCheckCodeMap = new HashMap<>();
     public static Map<String, UserRequestDto> idCreateCodeMap = new HashMap<>();
 
     private final UserDao userDao;
+    private final EmailConfirmTokenSender emailConfirmTokenSender;
 
     public UserService() {
         this.userDao = new UserDao();
+        this.emailConfirmTokenSender = new EmailConfirmTokenSender();
     }
 
     // 회원 가입
     public ResponseDto<?> signup(UserRequestDto userRequestDto) {
         // 데이터 암호화 필요, 특히 비밀번호
+    	userRequestDto = idCreateCodeMap.get(userRequestDto.getCheckCode());
+    	System.out.println("signup : " + userRequestDto.toString());
         boolean isSuccess = userDao.save(userRequestDto);
         if(isSuccess)return new ResponseDto(ResponseStatus.SUCCESS);
         return new ResponseDto(ResponseStatus.FAIL);
@@ -31,11 +37,21 @@ public class UserService {
     public ResponseDto<?> requestEmail(UserRequestDto userRequestDto) {
         // 데이터 암호화 필요, 특히 비밀번호
     	if(checkDuplicatedEmail(userRequestDto).getStatus().equals(ResponseStatus.FAIL) 
-    			|| !checkDuplicatedNickname(userRequestDto).getStatus().equals(ResponseStatus.FAIL)
-    			|| !checkDuplicatedUserId(userRequestDto).getStatus().equals(ResponseStatus.FAIL)) {
+    			|| checkDuplicatedNickname(userRequestDto).getStatus().equals(ResponseStatus.FAIL)
+    			|| checkDuplicatedUserId(userRequestDto).getStatus().equals(ResponseStatus.FAIL)) {
     		return new ResponseDto(ResponseStatus.FAIL);
     	}
-    	idCreateCodeMap.put("testCheck", userRequestDto);
+    	String code = userRequestDto.getUserEmail()+UUID.randomUUID();
+    	idCreateCodeMap.put(code, userRequestDto);
+    	System.out.println("메일보내기");
+    	Thread emailSend = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("쓰레드");
+				emailConfirmTokenSender.confirmTokenSend(code, userRequestDto.getUserEmail());
+			}
+		});
+		emailSend.start();
         return new ResponseDto(ResponseStatus.SUCCESS);
     }
 

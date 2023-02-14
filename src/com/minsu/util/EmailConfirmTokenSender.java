@@ -7,8 +7,8 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class EmailConfirmTokenSender {
-    private final String user = "";
-    private final String password = "";
+    private final String user = "bungle.master01@gmail.com";
+    private final String password = "vslepxljztmvmfkv";
 
 
     private final Session session;
@@ -23,7 +23,7 @@ public class EmailConfirmTokenSender {
         properties.put("mail.smtp.port", 587);
         properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
-
+        
         this.session = Session.getDefaultInstance(properties, new javax.mail.Authenticator(){
             @Override
            protected PasswordAuthentication getPasswordAuthentication(){
@@ -34,26 +34,18 @@ public class EmailConfirmTokenSender {
     }
 
 
-    public void confirmTokenSend(){
+    public void confirmTokenSend(String code, String email){
         try {
-
-//            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-//            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-//            helper.setTo(receiverEmail); //받는사람
-//            helper.setSubject("벙글! 회원가입 이메일 인증"); //메일제목
-//            helper.setText(emailForm.getEmailBody(emailToken.getId()), true);
-//
-//            javaMailSender.send(mimeMessage)
-
+        	System.out.println("메일 전송 하기");
             MimeMessage message = new MimeMessage(session);
 
             message.setFrom(new InternetAddress(user));
             //수신자메일주소
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("cclbbl@nate.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
             // Subject
-            message.setSubject("제목을 입력하세요"); //메일 제목을 입력
+            message.setSubject("링크를 눌러 인증을 완료하세요"); //메일 제목을 입력
             // Text
-            message.setText("내용을 입력하세요");    //메일 내용을 입력
+            message.setText("http://localhost:8080/web_jsp/v1/user/checked-email?checkcode=" + code );    //메일 내용을 입력
             // send the message
             Transport.send(message); ////전송
             System.out.println("message sent successfully...");
