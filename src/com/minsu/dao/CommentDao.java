@@ -1,9 +1,6 @@
 package com.minsu.dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,29 +17,25 @@ public class CommentDao {
 	}
 
 	public boolean save(int userSeq, CommentRequestDto commentRequestDto) {
-		int resultCount = 0;
 		String cmtParentSeq = "null";
 		if(commentRequestDto.getCmtParentSeq()!=0)cmtParentSeq = commentRequestDto.getCmtParentSeq()+ "";
-		Connection conn = connectSql.getConnection();
-		Statement stmt = null;
 		String sql = "insert into comment(cmt_content, created_at, cmt_parent_seq, cmt_is_deleted, brd_seq, user_seq) "
-				+ "values('"+ commentRequestDto.getContent() +"', now(), "
+				+ "values(?, now(), "
 							+ cmtParentSeq + ", " 
-						+ "false," + commentRequestDto.getBrdSeq() +", " + userSeq +")";
-		try {
-			stmt = conn.createStatement();
-			resultCount = stmt.executeUpdate(sql);
+						+ "false,?, ?)";
+		try (
+				Connection conn = connectSql.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				){
+			stmt.setString(1, commentRequestDto.getContent());
+			stmt.setInt(2, 0);
+			stmt.setInt(3, commentRequestDto.getBrdSeq());
+			stmt.setInt(4, userSeq);
+			return stmt.executeUpdate()>0;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-					if(stmt!=null)stmt.close();
-					if(conn!=null)conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 		}
-		return resultCount>0;
+		return false;
 	}
 
 	public List<CommentResponseDto> findAll(int page, int size, int brdSeq, int userSeq) {
