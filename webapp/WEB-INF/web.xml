@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>web_jsp</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <context-param>
+  	<param-name>url</param-name>
+  	<param-value>com.minsu.controller.UserController</param-value>
+  </context-param>
+  <context-param>
+    <param-name>user</param-name>
+  	<param-value>scott</param-value> 
+  </context-param> 
+  <context-param>	
+  	<param-name>password</param-name>
+  	<param-value>tiger</param-value>
+  </context-param>
+  
+  
+  <servlet>
+  	<servlet-name>user</servlet-name>
+  	<servlet-class>com.minsu.controller.UserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>user</servlet-name>
+  	<url-pattern>/v1/user/*</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+  	<servlet-name>board</servlet-name>
+  	<servlet-class>com.minsu.controller.BoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>board</servlet-name>
+  	<url-pattern>/v1/board/*</url-pattern>
+  </servlet-mapping>
+  
+   <!-- 아이디 찾기 --> 
+    <servlet>
+  	<servlet-name>comment</servlet-name>
+  	<servlet-class>com.minsu.controller.CommentController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>comment</servlet-name>
+  	<url-pattern>/v1/comment/*</url-pattern>
+  </servlet-mapping>
+    
+</web-app>

@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: 'Inter';
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0 auto;
+    width: 1040px;
+}
+
+body > main{
+    /* main */
+    box-sizing: border-box;
+    position: relative;
+    border: 1px solid #737272;
+    width: 100%
+}

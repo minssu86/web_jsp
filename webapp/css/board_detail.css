@@ -1,0 +1,510 @@
+main > section {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+}
+main > section > article:first-child{
+    position: relative;
+    width: 100%;
+    height: 64px;
+}
+main > section > article:first-child > div:first-child{
+    /* 글쓰기 버튼 */
+    float: right;
+    width: 109px;
+    height: 44px;
+    background: #804C4C;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-right: 5px;
+    text-align: center;
+    line-height: 44px;
+}
+main > section > article:first-child > div:first-child > a{
+    /* 글쓰기 */
+    position: relative;
+    font-weight: 500;
+    font-size: calc(16em/14);
+    color: #FFFFFF;
+    text-decoration: none;
+}
+main > section > article:first-child > div:last-child{
+    /* 목록 버튼 */
+    float: right;
+    box-sizing: border-box;
+    width: 74px;
+    height: 44px;
+    background: #FFFFFF;
+    border: 1px solid #DCD9D6;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-right: 9px;
+    text-align: center;
+    line-height: 44px;
+}
+main > section > article:first-child > div:last-child > a{
+    /* 목록 */
+    position: relative;
+    font-weight: 500;
+    font-size: calc(16em/14);
+    color: #1E1E20;
+    text-decoration: none;
+}
+
+main > section > article:nth-child(2) {
+    position: relative;
+    width: 100%;
+    min-height: 766px;
+}
+main > section > article:nth-child(2) > div:first-child {
+    position: relative;
+    width: 960px;
+    height: 100px;
+    margin-inline: auto;
+    top:40px;
+    float: top;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    border-bottom: 1px solid #DCD9D6;
+}
+main > section > article:nth-child(2) > div:first-child > h2 {
+    /* 제목글 */
+    width: 100%;
+    font-weight: 400;
+    height: 36px;
+    font-size: calc(22em/14);
+    color: #1E1E20;
+}
+main > section > article:nth-child(2) > div:first-child > div {
+    /* 메타정보 */
+    position: relative;
+    width: 100%;
+    height: 40px;
+    margin-top: 6px;
+    float: bottom;
+}
+main > section > article:nth-child(2) > div:first-child > div > div:first-child {
+    /* nickname */
+    width: 220px;
+    height: 40px;
+    float: left;
+    font-weight: 400;
+    font-size: 1em;
+    color: #1E1E20;
+    line-height: 40px;
+    margin-right: 12px;
+}
+main > section > article:nth-child(2) > div:first-child > div > div:first-child > div {
+    /* Ellipse */
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    border-radius: 20px;
+    background: #DCD9D6;
+    float: left;
+}
+main > section > article:nth-child(2) > div:first-child > div > div:nth-child(2) {
+    /* 날짜 */
+    width: 170px;
+    line-height: 40px;
+    float: left;
+    color: #8E8E95;
+}
+main > section > article:nth-child(2) > div:first-child > div > div:last-child {
+    float: right;
+}
+main > section > article:nth-child(2) > div:first-child > div > div:last-child div{
+    position: relative;
+    float: right;
+}
+main > section > article:nth-child(2) > div:first-child > div > div:last-child div > svg{
+    position: relative;
+    line-height: 40px;
+    margin-right: 5px;
+    margin-top: 13px;
+    float: right;
+}
+main > section > article:nth-child(2) > div:first-child > div > div:last-child div > h3{
+    position: relative;
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 40px;
+    color: #8E8E95;
+    margin-right: 10px;
+    float: right;
+}
+main > section > article:nth-child(2) > div:last-child {
+    /* 본문 블럭 */
+    position: relative;
+    width: 960px;
+    min-height: 535px;
+    top:40px;
+    margin: 40px;
+    background: #DCD9D6;
+}
+main > section > article:nth-child(3) {
+    /* 추천 블럭 */
+    position: relative;
+    width: 100%;
+    min-height: 77px;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    border-bottom: 1px solid #737272;
+    border-top: 1px solid #737272;
+}
+main > section > article:nth-child(3) > button {
+    /* 추천 버튼 */
+    box-sizing: border-box;
+    position: relative;
+    width: 80px;
+    height: 45px;
+    background: #FFFFFF;
+    border: 1px solid #C3C3C7;
+    border-radius: 4px;
+    margin: 16px 480px;
+
+}
+main > section > article:nth-child(3) > button > svg {
+    /* 이모티콘 */
+    position: relative;
+    top:3px;
+}
+main > section > article:nth-child(3) > button > span {
+    /* 이모티콘 */
+    position: relative;
+    font-weight: 400;
+    font-size: 1em;
+    color: #1E1E20;
+    line-height: 45px;
+}
+main > section > article:last-child{
+    /* 댓글 섹션 */
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+}
+main > section > article:last-child > div{
+    /* 댓글 섹션 */
+    box-sizing: border-box;
+    position: relative;
+    width: 960px;
+    margin-top: 40px; margin-inline: 40px; margin-bottom: 20px;
+}
+
+main > section > article:last-child > div > div:first-child{
+    /* 댓글 섹션 */
+    position: relative;
+    width: 100%;
+    margin: 40px 0 20px 0;
+}
+main > section > article:last-child > div > div:first-child > div:first-child {
+    /* 최상단 댓글 작성 섹션 */
+    position: relative;
+    width: 882px;
+    height: 147px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    top : 40px;
+}
+main > section > article:last-child > div > div:first-child > div:first-child > div:first-child div {
+    /* 최상단 댓글 작성 섹션 - 댓글 갯수 부 */
+    float: left;
+    width: 135px;
+    height: 30px;
+    color: #1E1E20;
+}
+main > section > article:last-child > div > div:first-child > div:first-child > div:first-child div > svg {
+    /* 최상단 댓글 작성 섹션 - 아이콘 */
+}
+main > section > article:last-child > div > div:first-child > div:first-child > div:first-child div > span {
+    /* 최상단 댓글 작성 섹션 - 댓글 갯수 텍스트 */
+    font-size: calc(20em/14);
+    line-height: 30px;
+    font-weight: 700;
+    margin-left: 4px;
+}
+main > section > article:last-child > div > div:first-child > div:first-child > div:first-child button {
+    /* 최상단 댓글 작성 섹션 - 버튼 */
+    width: 50px;
+    float: right;
+    font-size: 16px;
+    color: #C3C3C7;
+    border-style: none;
+    margin-left: 4px;
+    background-color: #FFFFFF;
+}
+main > section > article:last-child > div > div:first-child > div:first-child > div:first-child button:last-child {
+    /* 최상단 댓글 작성 섹션 - 버튼 */
+    color: #1E1E20;
+    /* 임시용 */
+}
+main > section > article:last-child > div > div:first-child > div:first-child > div:last-child {
+    /* 최상단 댓글 작성 섹션 - 작성부 */
+    position: absolute;
+    width: 100%;
+    height: 97px;
+    bottom: 0;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border: 1px solid #737272;
+    border-radius: 4px;
+}
+main > section > article:last-child > div > div:first-child > div:first-child > div:last-child textarea {
+    position: relative;
+    width: 710px;
+    height: 90px;
+    border-style: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    margin-left: 8px;
+}
+main > section > article:last-child > div > div:first-child > div:first-child > div:last-child > div {
+    /* 댓글 작성 정보 및 버튼부 */
+    position: absolute;
+    height: 44px;
+    float: right;
+    bottom: 0;
+    right: 0;
+}
+main > section > article:last-child > div > div:first-child > div:first-child > div:last-child > div > span:first-child {
+    /* 댓글 작성 버튼 */
+    color: #ED7474;
+    position: absolute;
+    right: 147px;
+    bottom: 13px;
+}
+main > section > article:last-child > div > div:first-child > div:first-child > div:last-child > div > span:nth-child(2) {
+    /* 댓글 작성 버튼 */
+    width: 54px;
+    height: 21px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #8E8E95;
+    position: absolute;
+    right: 90px;
+    bottom: 10px;
+}
+main > section > article:last-child > div > div:first-child > div:first-child > div:last-child > div > button {
+    /* 댓글 작성 버튼 */
+    position: absolute;
+    box-sizing: border-box;
+    width: 74px;
+    height: 44px;
+    background: #FFFFFF;
+    border: 1px solid #C3C3C7;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: calc(16em/14);
+    text-align: center;
+    color: #1E1E20;
+    right: 10px;
+    bottom: 10px;
+}
+main > section > article:last-child > div > div:first-child > div:last-child {
+    /* 댓글 리스트 부 */
+    position: relative;
+    width: 882px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding-bottom: 80px;
+    top: 60px;
+}
+main > section > article:last-child > div > div:last-child{
+    /* 댓글 하단 버튼부 */
+    width: 100%;
+    float: bottom;
+    height: 44px;
+}
+main > section > article:last-child > div > div:last-child > div:first-child {
+    /* 댓글 하단 왼쪽 버튼 */
+    width: 157px;
+    float: left;
+    height: 44px;
+}
+main > section > article:last-child > div > div:last-child > div:first-child > a {
+    /* 수정 삭제 버튼 */
+    box-sizing: border-box;
+    width: 74px;
+    height: 44px;
+    background: #FFFFFF;
+    border: 1px solid #737272;
+    border-radius: 4px;
+    display: inline-block;
+    font-weight: 500;
+    font-size: calc(16em/14);
+    color: #1E1E20;
+    text-align: center;
+    line-height: 44px;
+}
+main > section > article:last-child > div > div:last-child > div:last-child {
+    /* 댓글 하단 오른쪽 버튼부 */
+    width: 314px;
+    float: right;
+    height: 44px;
+}
+main > section > article:last-child > div > div:last-child > div:last-child > a {
+    /* 댓글 하단 오른쪽 버튼 */
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 44px;
+    font-size: calc(16em/14);
+    left: 8px;
+}
+main > section > article:last-child > div > div:last-child > div:last-child > a:first-child {
+    /* 목록 버튼 */
+    width: 74px;
+    background: #FFFFFF;
+    border: 1px solid #737272;
+}
+main > section > article:last-child > div > div:last-child > div:last-child > a:nth-child(2) {
+    /* 맨 위로 버튼 */
+    width: 113px;
+    background: #FFFFFF;
+    border: 1px solid #737272;
+}
+main > section > article:last-child > div > div:last-child > div:last-child > a:last-child {
+    /* 글쓰기 버튼 */
+    width: 109px;
+    background: #804C4C;
+    border: 1px solid #737272;
+    color: #FFFFFF;
+}
+main > section > article:last-child > div > div:first-child > div:last-child > ul {
+    list-style: none;
+}
+.comment-parent {
+    /* 댓글 내용 */
+    position: relative;
+    min-height: 89px;
+    border-bottom: 1px solid #737272;
+}
+.comment-parent > p {
+    /* 댓글 메타 데이터 */
+    position: relative;
+    top:20px;
+    width: 830px;
+    margin-left: 52px;
+}
+.comment-parent > p > span:first-child {
+    /* 댓글 메타 데이터 - nickname */
+    position: relative;
+    font-weight: 700;
+    font-size: 1em;
+    color: #1E1E20;
+    float: left;
+    margin-right: 12px;
+    line-height: 21px;
+}
+.comment-parent > p > span:nth-child(2) {
+    /* 댓글 메타 데이터 - 날짜 */
+    position: relative;
+    float: left;
+    color: #8E8E95;
+    margin-right: 12px;
+}
+.comment-parent > p button {
+    /* 댓글 수정 답글 삭제 버튼 */
+    position: relative;
+    float: left;
+    color: #8E8E95;
+    border-style: none;
+    margin-right: 12px;
+}
+.comment-parent > p > span:last-child {
+    /* 조회수 */
+    position: relative;
+    float: right;
+}
+.comment-parent textarea {
+    /* 댓글 출력 & 수정 */
+    position: relative;
+    top:22px;
+    margin-left: 52px;
+    margin-bottom: 20px;
+    width: 830px;
+    height: 21px;
+    font-weight: 400;
+    font-size: 1em;
+    color: #1E1E20;
+    border-style: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    text-align: left;
+}
+.comment-write {
+    position: relative;
+    width: 842px;
+    min-height: 137px;
+    margin-left: 40px;
+}
+.comment-write > div {
+    position: absolute;
+    width: 842px;
+    height: 90px;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    top:20px;
+    border: 1px solid #737272;
+    border-radius: 4px;
+}
+
+
+.comment-write > div textarea {
+    position: relative;
+    width: 670px;
+    height: 90px;
+    border-style: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    margin-left: 8px;
+}
+.comment-write > div > div {
+    /* 댓글 작성 정보 및 버튼부 */
+    position: absolute;
+    height: 44px;
+    float: right;
+    bottom: 0;
+    right: 0;
+}
+.comment-write > div > div > span:first-child {
+    /* 댓글 작성 버튼 */
+    color: #ED7474;
+    position: absolute;
+    right: 147px;
+    bottom: 13px;
+}
+.comment-write > div > div > span:nth-child(2){
+    /* 댓글 작성 버튼 */
+    width: 54px;
+    height: 21px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #8E8E95;
+    position: absolute;
+    right: 90px;
+    bottom: 10px;
+}
+.comment-write > div > div > button {
+    /* 댓글 작성 버튼 */
+    position: absolute;
+    box-sizing: border-box;
+    width: 74px;
+    height: 44px;
+    background: #FFFFFF;
+    border: 1px solid #C3C3C7;
+    border-radius: 4px;
+
+    font-weight: 500;
+    font-size: calc(16em/14);
+    text-align: center;
+    color: #1E1E20;
+    right: 10px;
+    bottom: 10px;
+}

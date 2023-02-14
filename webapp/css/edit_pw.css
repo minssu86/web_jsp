@@ -1,0 +1,95 @@
+main > section {
+    /* section */
+    position: relative;
+    width: 800px;
+    height: 375px;
+    margin: 236px auto;
+}
+main > section > h2 {
+    /* 비밀번호 재설정 */
+    position: relative;
+    font-weight: 700;
+    font-size: calc(24em/14);
+    color: #804C4C;
+    text-align: center;
+    margin-bottom: 60px;
+}
+main > section > form {
+    position: relative;
+    width: 100%;
+    height: 285px;
+}
+main > section > form > article > ul {
+    /* 회원 가입 항목 리스트 */
+    list-style: none;
+    width: 100%;
+    height: 175px;
+    position: relative;
+    margin-bottom: 60px;
+}
+main > section > form > article > ul > li {
+    position: relative;
+    width: 100%;
+    margin-bottom: 26px;
+}
+main > section > form > article > ul > li div {
+    width: 650px;
+    float: bottom;
+    margin-left: 150px;
+}
+main > section > form > article > ul > li div {
+    color: #8E8E95;
+}
+
+main > section > form > article > ul > li:last-child div {
+    color: #ED7474;
+}
+main > section > form > article > ul > li > label {
+    /* 회원가입 label */
+    position: relative;
+    float: left;
+    width: 140px;
+    line-height: 50px;
+    font-weight: 700;
+    font-size: calc(16em/14);
+    color: #804C4C;
+}
+main > section > form > article > ul > li > label > h3 {
+    /* 회원가입 label */
+    position: relative;
+    float: left;
+    width: 140px;
+    line-height: 50px;
+    font-weight: 700;
+    font-size: calc(16em/14);
+    color: #804C4C;
+}
+main > section > form > article > ul > li:first-child > input,
+main > section > form > article > ul > li:last-child > input{
+    /* 회원 가입용 정보 입력창 : 새 비밀번호, 비밀번호 확인 */
+    box-sizing: border-box;
+    padding: 10px 14px;
+    width: 660px;
+    height: 50px;
+    border: 1px solid #737272;
+    border-radius: 4px;
+    color: #323238;
+    outline: none;
+}
+main > section > form > div {
+    /* 확인 Button div */
+    width: 340px;
+    margin: 0 auto;
+}
+main > section > form > div > button {
+    /* 확인 Button */
+    width: 340px;
+    height: 50px;
+    background: #804C4C;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border-style: none;
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFFFFF;
+}

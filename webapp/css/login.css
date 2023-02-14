@@ -1,0 +1,104 @@
+main > section {
+    /* article */
+    align-items: center;
+    position: relative;
+    width: 340px;
+    height: 424px;
+    margin: 173px auto;
+}
+main > section > h2 {
+    /* 로그인 */
+    font-size: calc(24em/14);
+    color: #804C4C;
+    text-align: center;
+    margin-bottom: 60px;
+}
+main > section > form {
+    /* main form */
+    width: 100%;
+    height: 335px;
+}
+main > section > form > article:first-child {
+    /* basic-login */
+    position: relative;
+    float: top;
+    width: 100%;
+    height: 220px;
+}
+main > section > form > article:first-child > label {
+    /* 아이디 & 비밀번호 */
+    box-sizing: border-box;
+    width: 340px;
+    height: 50px;
+    border: 1px solid #737272;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 14px 14px;
+    margin-bottom: 10px;
+}
+main > section > form > article:first-child > label > input {
+    /* 아이디 & 비밀번호 입력창 */
+    color: #323238;
+    width: 100%;
+    border-style: none;
+    outline: none;
+}
+main > section > form > article:first-child > button {
+    /* Button */
+    padding: 10px;
+    width: 340px;
+    height: 50px;
+    background: #804C4C;
+    border-radius: 4px;
+    border-style: none;
+    margin: 14px 0;
+    font-size: calc(16em/14);
+    color: #FFFFFF;
+}
+main > section > form > article:first-child > ul {
+    padding: 0 48px;
+    list-style: none;
+}
+main > section > form > article:first-child > ul > li {
+    float: left;
+}
+main > section > form > article:first-child > ul > li > a {
+    /* 아이디 찾기 & 비밀번호 찾기 & 회원가입 */
+    color: #1E1E20;
+    text-decoration: none;
+}
+main > section > form > article:first-child > ul > li > div {
+    /* | */
+    width: 1px;
+    height: 10px;
+    background: #C3C3C7;
+    display: inline-block;
+    margin-inline: 5px;
+}
+main > section > form > article:last-child {}
+main > section > form > article:last-child > button {
+    /* social-login */
+    position: absolute;
+    bottom: 0;
+    width: 340px;
+    height: 50px;
+    background: #FEE500;
+    border-radius: 4px;
+    border-style: none;
+    padding: 13px 90px;
+}
+main > section > form > article:last-child > button > svg {
+    /* svg 카카오 이모콘 */
+    position: relative;
+    top:3px;
+    width: 16px;
+    height: 16px;
+    float: left;
+}
+main > section > form > article:last-child > button > span {
+    /* 카카오로 시작하기 */
+    color: #1E1E20;
+    font-size: calc(16em/14);
+    margin-left: 8px;
+    float: left;
+}

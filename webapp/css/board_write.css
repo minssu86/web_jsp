@@ -1,0 +1,99 @@
+main > section {
+    min-height: 830px;
+    width: 100%;
+}
+main > section > form > article:first-child{
+    position: relative;
+    height: 120px;
+    width: 100%;
+    border-bottom: 1px solid #737272;
+    margin-top: 15px;
+}
+main > section > form > article:first-child > h2 {
+    /* 게시글 작성 */
+    position: relative;
+    font-weight: 700;
+    font-size: calc(24em/14);
+    color: #1E1E20;
+    margin-left: 10px;
+    float: top;
+}
+main > section > form > article:first-child > div {
+    position: relative;
+    width: 100%;
+    margin-left: 10px; margin-top: 20px;
+}
+main > section > form > article:first-child > div > label {
+    /* 제목 */
+    position: relative;
+    width: 180px;
+    height: 44px;
+    line-height: 44px;
+    display: inline-block;
+    float: left;
+}
+main > section > form > article:first-child > div > div {
+    /* 제목 입력부 */
+    position: relative;
+    width: 820px;
+    height: 44px;
+    border: 1px solid #737272;
+    border-radius: 4px;
+    margin-right: 20px;
+    float: right;
+}
+main > section > form > article:first-child > div > div > input {
+    /* 제목 입력창 */
+    position: relative;
+    width: 800px;
+    height: 100%;
+    margin:0 10px;
+    border-style: none;
+    outline: none;
+}
+main > section > form > article:nth-child(2) {
+    width: 100%;
+    min-height: 620px;
+    padding: 16px;
+    border-bottom: 1px solid #737272;
+
+}
+main > section > form > article:nth-child(2) > label > textarea {
+    position: relative;
+    width: 100%;
+    min-height: 578px;
+    border-style: none;
+    outline: none;
+    resize: none;
+}
+main > section > form > article:last-child {
+    border-collapse: collapse;
+    height: 85px;
+    width: 100%;
+}
+main > section > form > article:last-child > div {
+    /* 버튼부 */
+    width: 190px;
+    height: 44px;
+    margin-inline: auto;
+    line-height: 84px;
+}
+main > section > form > article:last-child > div > button:first-child{
+    /* 취소 버튼 */
+    box-sizing: border-box;
+    width: 74px;
+    height: 44px;
+    background: #FFFFFF;
+    border: 1px solid #FBF0E0;
+    border-radius: 4px;
+}
+main > section > form > article:last-child > div > button:last-child{
+    /* 작성 완료 버튼*/
+    box-sizing: border-box;
+    width: 108px;
+    height: 44px;
+    background: #804C4C;
+    border-radius: 4px;
+    border-style: none;
+    color: #FFFFFF;
+}
