@@ -50,7 +50,7 @@ public class UserDao {
 
     public boolean findByUserId(String userId) {
         String sql = "SELECT user_seq FROM member "
-                + "WHERE user_id = 1 LIMIT 1 ";
+                + "WHERE user_id = ? LIMIT 1 ";
         try (
                 Connection conn = connectSql.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql);
@@ -84,8 +84,9 @@ public class UserDao {
         return false;
     }
 
-    public boolean findByUserIdAndPassword(String userId, String userPassword) {
-        String sql = "SELECT user_id FROM member "
+    public UserResponseDto findByUserIdAndPassword(String userId, String userPassword) {
+    	UserResponseDto userResponseDto = new UserResponseDto();
+        String sql = "SELECT user_seq, user_nickname FROM member "
                 + "WHERE user_id = ? AND user_password = ? LIMIT 1 ";
         try (
                 Connection conn = connectSql.getConnection();
@@ -94,12 +95,16 @@ public class UserDao {
             stmt.setString(1, userId);
             stmt.setString(2, userPassword);
             try (ResultSet rs = stmt.executeQuery();) {
-                return rs.next();
+            	if(rs.next()){
+            		userResponseDto.setUserSeq(rs.getInt("user_seq"));
+            		userResponseDto.setUserNickname(rs.getString("user_nickname"));
+                    return userResponseDto;
+            	}
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     public UserResponseDto findByUserNameAndUserEmail(String userName, String userEmail) {

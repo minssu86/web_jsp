@@ -8,8 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.minsu.dto.ResponseDto;
+import com.minsu.dto.ResponseStatus;
 import com.minsu.dto.UserRequestDto;
 import com.minsu.service.UserService;
 
@@ -57,7 +59,7 @@ public class UserController extends HttpServlet {
 				break;
 			case findUserId:
 				break;
-			case getIdCheckCode:
+			case getIdCheckCode: responseDto = userService.getIdCheckCode(userRequestDto); 
 				break;
 			
 			default:
@@ -73,7 +75,6 @@ public class UserController extends HttpServlet {
 		resp.setContentType("application/json");		
 		resp.setHeader("Access-Control-Allow", "*");
 //		resp.setStatus();
-		System.out.println("responseData : "+responseDto.getData());
 		try(PrintWriter out = resp.getWriter();){
 			// 상태 코드 반환
 			out.print("{\"status\":");
@@ -96,11 +97,15 @@ public class UserController extends HttpServlet {
 		String uri = req.getRequestURI();
 		System.out.println("post : " + uri);
 		UserRequestDto userRequestDto = setRequestDto(req);
-		ResponseDto responseDto = new ResponseDto();
+		System.out.println(userRequestDto.getUserEmail());
+		ResponseDto<?> responseDto = new ResponseDto();
 		switch (uri) {
 		case requestEmail: responseDto = userService.requestEmail(userRequestDto);
+		setLoginProcess(responseDto, req);
+		break;
+		case login: responseDto = userService.login(userRequestDto);
 			break;
-		case login:
+		case getIdCheckCode: responseDto = userService.findUserId(userRequestDto);
 			break;
 		case checkPasswordCode:
 			break;
@@ -111,6 +116,12 @@ public class UserController extends HttpServlet {
 		responseData(resp, responseDto);
 	}
 	
+	private void setLoginProcess(ResponseDto<?> responseDto, HttpServletRequest req) {
+		if(responseDto.getStatus().equals(ResponseStatus.SUCCESS)) {
+			req.setAttribute("userInfo", responseDto.getData());
+		}
+	}
+
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
@@ -140,6 +151,7 @@ public class UserController extends HttpServlet {
 		if(req.getParameter("email")!=null)userRequestDto.setUserEmail(req.getParameter("email"));
 		if(req.getParameter("profile")!=null)userRequestDto.setUserProfile(req.getParameter("profile"));
 		if(req.getParameter("checkcode")!=null)userRequestDto.setCheckCode(req.getParameter("checkcode"));
+		System.out.println("servlet : " + userRequestDto.toString());
 		return userRequestDto;
 	}
 	

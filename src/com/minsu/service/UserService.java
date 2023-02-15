@@ -7,8 +7,12 @@ import com.minsu.dto.UserRequestDto;
 import com.minsu.dto.UserResponseDto;
 import com.minsu.util.EmailConfirmTokenSender;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 public class UserService {
@@ -27,7 +31,6 @@ public class UserService {
     public ResponseDto<?> signup(UserRequestDto userRequestDto) {
         // 데이터 암호화 필요, 특히 비밀번호
     	userRequestDto = idCreateCodeMap.get(userRequestDto.getCheckCode());
-    	System.out.println("signup : " + userRequestDto.toString());
         boolean isSuccess = userDao.save(userRequestDto);
         if(isSuccess)return new ResponseDto(ResponseStatus.SUCCESS);
         return new ResponseDto(ResponseStatus.FAIL);
@@ -35,27 +38,34 @@ public class UserService {
 
     // 회원 가입 이메일 요청
     public ResponseDto<?> requestEmail(UserRequestDto userRequestDto) {
-        // 데이터 암호화 필요, 특히 비밀번호
+    	// 회원 정보 중복 확인
     	if(checkDuplicatedEmail(userRequestDto).getStatus().equals(ResponseStatus.FAIL) 
     			|| checkDuplicatedNickname(userRequestDto).getStatus().equals(ResponseStatus.FAIL)
     			|| checkDuplicatedUserId(userRequestDto).getStatus().equals(ResponseStatus.FAIL)) {
     		return new ResponseDto(ResponseStatus.FAIL);
     	}
+    	// 비밀 번호 암호화
+    	String encryptedPassword;
+		try {
+			encryptedPassword = encryptePassword(userRequestDto.getUserPassword());
+	    	userRequestDto.setUserPassword(encryptedPassword);
+		} catch (NoSuchAlgorithmException e1) {
+			e1.printStackTrace();
+			new ResponseDto(ResponseStatus.FAIL);
+		}
+    	// 인증 코드 생성
     	String code = userRequestDto.getUserEmail()+UUID.randomUUID();
+    	userRequestDto.setCheckCode(code);
+		// 회원 정보 임시 저장
     	idCreateCodeMap.put(code, userRequestDto);
-    	System.out.println("메일보내기");
-    	Thread emailSend = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("쓰레드");
-				emailConfirmTokenSender.confirmTokenSend(code, userRequestDto.getUserEmail());
-			}
-		});
-		emailSend.start();
+    	// 인증 메일 발송
+    	emailsend(code, userRequestDto.getUserEmail());
         return new ResponseDto(ResponseStatus.SUCCESS);
     }
 
-    // 이메일 중복 확인
+
+
+	// 이메일 중복 확인
     public ResponseDto<?> checkDuplicatedEmail(UserRequestDto userRequestDto) {
     	if(userRequestDto.getUserEmail()==null) return new ResponseDto(ResponseStatus.FAIL);
         if(userDao.findByEmail(userRequestDto.getUserEmail()))
@@ -80,37 +90,53 @@ public class UserService {
     }
 
     // 로그인
-    public String login(UserRequestDto userRequestDto) {
-        boolean isSuccess = userDao.findByUserIdAndPassword(userRequestDto.getUserId(), userRequestDto.getUserPassword());
-        if(isSuccess)return "성공";
-        return "실패";
+    public ResponseDto<?> login(UserRequestDto userRequestDto) {
+        try {
+        	// 유저 정보 확인
+			UserResponseDto userResponseDto = userDao.findByUserIdAndPassword(
+					userRequestDto.getUserId(),
+					// 비밀번호 암호화
+					encryptePassword(userRequestDto.getUserPassword()));
+	        if(userResponseDto!=null)return new ResponseDto(ResponseStatus.SUCCESS);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+	        return new ResponseDto(ResponseStatus.FAIL);
+		}
+        return new ResponseDto(ResponseStatus.FAIL);
     }
 
+    // 아이디 찾기 : 인증 코드 요청
+    // parameter : name, email
+    public ResponseDto<?> getIdCheckCode(UserRequestDto userRequestDto) {
+        // 유저 정보 확인
+    	System.out.println(userRequestDto.toString());
+    	UserResponseDto userResponseDto = userDao.findByUserNameAndUserEmail(userRequestDto.getUserName(), userRequestDto.getUserEmail());
+        System.out.println(userResponseDto.toString());
+    	if(userResponseDto!=null){
+        	// 인증 코드 생성
+            String checkCode = createCheckCode();
+            // 인증 코드 확인용 데이터 저장
+            idCheckCodeMap.put(checkCode,userResponseDto);
+            // 인증 코드 메일 전송
+            checkCodeSend(checkCode, userResponseDto.getUserEmail());
+            return new ResponseDto(ResponseStatus.SUCCESS);
+        }
+        return new ResponseDto(ResponseStatus.FAIL);
+    }
+    
     // 아이디 찾기
-    public UserResponseDto findUserId(UserRequestDto userRequestDto) {
+    public ResponseDto<?> findUserId(UserRequestDto userRequestDto) {
         UserResponseDto userResponseDto = idCheckCodeMap.get(userRequestDto.getCheckCode());
         if(userResponseDto!=null
                 && userResponseDto.getUserName().equals(userRequestDto.getUserName())
                 && userResponseDto.getUserEmail().equals(userRequestDto.getUserEmail())){
             idCheckCodeMap.remove(userRequestDto.getCheckCode());
-            return userResponseDto;
+            return new ResponseDto<UserResponseDto>(ResponseStatus.SUCCESS, userResponseDto);
         }
-        return null;
+        return new ResponseDto(ResponseStatus.FAIL);
     }
 
-    // 아이디 찾기 : 인증 코드 요청
-    // parameter : name, email
-    public String getIdCheckCode(UserRequestDto userRequestDto) {
-        UserResponseDto userResponseDto = userDao.findByUserNameAndUserEmail(userRequestDto.getUserName(), userRequestDto.getUserEmail());
-        if(userResponseDto!=null){
-            String checkCode = "1234";
-            idCheckCodeMap.put(checkCode,userResponseDto);
-            return "성공";
-        }
-        return "실패";
-    }
-
-    // 비밀번호 찾기 : 인증 코드 요청
+	// 비밀번호 찾기 : 인증 코드 요청
     public String getPasswordCheckCode(UserRequestDto userRequestDto) {
         UserResponseDto userResponseDto = userDao.findByUserIdAndUserEmail(userRequestDto.getUserId(), userRequestDto.getUserEmail());
         if(userResponseDto!=null){
@@ -139,5 +165,70 @@ public class UserService {
         }
         return "실패";
     }
+    
+    
+    // SHA-256 단방향 암호화 (DB varchar(64) 필요)
+    private String encryptePassword(String userPassword) throws NoSuchAlgorithmException {
+    	/**
+    	 * MessageDigest : 해시 함수를위한 클래스
+    	 * getInstance(String algorithm) :
+    	 * 		입력한 해시 알고리즘을 수행하는  MessageDigest 객체 생성 
+    	 * 		(NoSuchAlgorithmException 발생 가능)
+    	 * update(byte[] input) : 생성된 객체 내에 저장된 digest 값 갱신
+    	 * digest : update()를 실행, 해시 계산 완료 후 해시화된 값(byte[])을 반환한다.
+    	 */
+    	MessageDigest md;
+		md = MessageDigest.getInstance("SHA-256");
+    	md.update(userPassword.getBytes());
+    	byte[] data = md.digest();
+    	
+    	/**
+    	 * byte[]배열을 DB저장을 위한 String 타입으로 변환
+    	 */
+    	StringBuilder hexPassword=new StringBuilder();
+    	for(byte b : data) {
+    		String hexString = String.format("%02x", b);
+    		hexPassword.append(hexString);
+    	}
+		return hexPassword.toString();
+	}
+    
+    // 인증 메일 발송 메서드
+	private void emailsend(String code, String userEmail) {
+		try {
+        	Thread emailSend = new Thread(new Runnable() {
+    			@Override
+    			public void run() {
+    				emailConfirmTokenSender.confirmTokenSend(code, userEmail);
+    			}
+    		});
+    		emailSend.start();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+	}
 
+	private void checkCodeSend(String code, String userEmail) {
+		try {
+        	Thread emailSend = new Thread(new Runnable() {
+    			@Override
+    			public void run() {
+    				emailConfirmTokenSender.sendCheckCode(code, userEmail);
+    			}
+    		});
+    		emailSend.start();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+	}
+	
+    // 인증 코드 생성 메서드
+    private String createCheckCode() {
+		Random random = new Random();
+		StringBuilder checkCode=new StringBuilder();
+    	for(int i=0; i<8; i++) {
+    		checkCode.append(random.nextInt(10));
+    	}
+		return checkCode.toString();
+	}
 }

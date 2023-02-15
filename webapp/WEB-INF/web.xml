@@ -37,7 +37,6 @@
   	<url-pattern>/v1/board/*</url-pattern>
   </servlet-mapping>
   
-   <!-- 아이디 찾기 --> 
     <servlet>
   	<servlet-name>comment</servlet-name>
   	<servlet-class>com.minsu.controller.CommentController</servlet-class>

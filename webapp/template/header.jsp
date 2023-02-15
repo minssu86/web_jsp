@@ -36,21 +36,21 @@
         <nav>
             <ul>
                 <li>
-                    <a href="#">HOME</a>
+                    <a href="../board/list.jsp">List</a>
                     <div class="under-bar"></div>
                 </li>
                 <li>
-                    <a href="#">BOARD1</a>
+                    <a href="../board/wirte.jsp">write</a>
                     <div class="under-bar"></div>
                 </li>
                 <li>
-                    <a href="#">BOARD2</a>
+                    <a href="../board/edit.jsp">Edit</a>
                     <div class="under-bar"></div>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#">BOARD3</a>
                     <div class="under-bar"></div>
-                </li>
+                </li> -->
             </ul>
         </nav>
     </section>

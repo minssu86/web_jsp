@@ -1,3 +1,4 @@
+import com.minsu.dto.ResponseDto;
 import com.minsu.dto.UserRequestDto;
 import com.minsu.dto.UserResponseDto;
 import com.minsu.service.UserService;
@@ -56,7 +57,8 @@ public class UserTest {
         userRequestDto.setCheckCode(checkCode);
         userRequestDto.setUserName(nameTest);
         userRequestDto.setUserEmail(email);
-        UserResponseDto userResponseDto = userService.findUserId(userRequestDto);
+        ResponseDto<?> responseDto = userService.findUserId(userRequestDto);
+        UserResponseDto userResponseDto = (UserResponseDto)responseDto.getData();
         if(userResponseDto==null){
             System.out.println("실패");
         } else {

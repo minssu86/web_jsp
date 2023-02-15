@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="../css/global.css">
   <!-- local css -->
   <link rel="stylesheet" href="../css/search_id_result.css">
+  <!-- global javascript -->
+  <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+  <!-- login javascript -->
+  <script type="text/javascript" src="../js/search_id_result.js"></script>
 </head>
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
@@ -20,8 +24,8 @@
       <h3>고객님의 계정을 찾았습니다</h3>
       <p>아이디를 확인 후 로그인 해주세요</p>
       <div>
-        <h3>qwer1234</h3>
-        <p>가입일 2022.03.12</p>
+        <h3 id="h3-show-id">qwer1234</h3>
+        <p id="p-show-date">가입일 2022.03.12</p>
       </div>
     </article>
     <article >
