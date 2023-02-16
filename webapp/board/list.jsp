@@ -5,11 +5,12 @@
 <head>
   <meta charset="UTF-8">
   <title>board list</title>
-
-  <!-- global css -->
-  <link rel="stylesheet" href="../css/global.css">
   <!-- local css -->
   <link rel="stylesheet" href="../css/board_list.css">
+  <!-- global css & javascript -->
+  <jsp:include page="../template/global.jsp"></jsp:include>
+  <!-- local javascript -->
+  <script type="text/javascript" src="../js/board_list.js"></script>
 </head>
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
@@ -27,104 +28,7 @@
           <th>추천</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-        <tr>
-          <td>글번호</td>
-          <td>제목</td>
-          <td>닉네임</td>
-          <td>작성일</td>
-          <td>조회수</td>
-          <td>추천</td>
-        </tr>
-      </tbody>
+      <tbody class="tbody-list"></tbody>
       <tfoot>
         <tr>
           <td colspan="6">
@@ -186,7 +90,7 @@
               </ul>
             </div>
             <div>
-              <a>
+              <a class="btn" href="../board/write.jsp">
                 글쓰기
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_124_147)">

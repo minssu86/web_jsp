@@ -40,7 +40,7 @@
                     <div class="under-bar"></div>
                 </li>
                 <li>
-                    <a href="../board/wirte.jsp">write</a>
+                    <a href="../board/write.jsp">write</a>
                     <div class="under-bar"></div>
                 </li>
                 <li>

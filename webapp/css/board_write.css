@@ -30,7 +30,7 @@ main > section > form > article:first-child > div > label {
     height: 44px;
     line-height: 44px;
     display: inline-block;
-    float: left;
+    /* float: left; */
 }
 main > section > form > article:first-child > div > div {
     /* 제목 입력부 */

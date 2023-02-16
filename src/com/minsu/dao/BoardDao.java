@@ -35,7 +35,7 @@ public class BoardDao {
 
     public List<BoardResponseDto> findAll(int page, int size) {
         List<BoardResponseDto> boardResponseDtos = new ArrayList<BoardResponseDto>();
-
+        page = size * page;
         String sql = "SELECT b.brd_seq, b.brd_title, b.created_at, b.modified_at, b.brd_view_count, b.brd_like_count, m.user_nickname "
                 + "FROM board b "
                 + "INNER JOIN member m "
@@ -48,7 +48,7 @@ public class BoardDao {
             stmt.setInt(1, size);
             stmt.setInt(2, page);
             try (
-                    ResultSet rs = stmt.executeQuery();
+            		ResultSet rs = stmt.executeQuery();
             ) {
                 while (rs.next()) {
                     BoardResponseDto boardResponseDto = new BoardResponseDto(

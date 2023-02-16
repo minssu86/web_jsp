@@ -5,17 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <title>write</title>
-
-    <!-- global css -->
-    <link rel="stylesheet" href="../css/global.css">
     <!-- local css -->
     <link rel="stylesheet" href="../css/board_write.css">
+    <!-- global css & javascript -->
+    <jsp:include page="../template/global.jsp"></jsp:include>
+    <!-- local javascript -->
+    <script type="text/javascript" src="../js/board_write.js"></script>
 </head>
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <main>
     <section>
-        <form name="board-write" action="#">
+        <form name="board-write">
             <article>
                 <h2>게시글 작성</h2>
                 <div>
@@ -27,13 +28,13 @@
             </article>
             <article>
                 <label>
-                    <textarea placeholder="내용을 입력해주세요."></textarea>
+                    <textarea id="textarea-write-content" placeholder="내용을 입력해주세요."></textarea>
                 </label>
             </article>
             <article>
                 <div>
-                    <button type="reset">취소</button>
-                    <button type="submit">작성 완료</button>
+                    <button class="btn" id="btn-back" type="button">취소</button>
+                    <button class="btn" id="btn-write-board" type="button">작성 완료</button>
                 </div>
             </article>
         </form>

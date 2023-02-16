@@ -1,5 +1,10 @@
 package com.minsu.dto;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class BoardResponseDto {
 	private int brdSeq;
 	private String brdTitle;
@@ -17,9 +22,16 @@ public class BoardResponseDto {
 		this.brdSeq = brdSeq;
 		this.brdTitle = brdTitle;
 		this.userNickname = userNickname;
-		this.date = modifiedAt!=null? modifiedAt : createdAt;
+		this.date = modifiedAt!=null? changeFormat(modifiedAt) : changeFormat(createdAt);
 		this.viewCount = brdViewCount;
 		this.likeCount = brdLikeCount;
+	}
+
+	private String changeFormat(String timestamp) {
+		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime localDateTime = LocalDateTime.parse(timestamp.substring(0, timestamp.length()-3), inputFormatter);
+		if(localDateTime.getDayOfMonth() == LocalDate.now().getDayOfMonth())return timestamp.split(" ")[1].substring(0,5);
+		return timestamp.split(" ")[0];
 	}
 
 	public BoardResponseDto(int brdSeq, String brdTitle, String brdContent, String userNickname, String createdAt, String modifiedAt, int brdViewCount, int brdLikeCount, int commentCount, boolean isLiked, boolean isMine){
@@ -115,6 +127,15 @@ public class BoardResponseDto {
 		this.isMine = isMine;
 	}
 
+	@Override
+	public String toString() {
+		return "{\"seq\":" + brdSeq + ", \"title\":\"" + brdTitle + "\", \"content\":\"" + brdContent
+				+ "\", \"date\":\"" + date + "\", \"nickname\":\"" + userNickname + "\", \"viewCnt\":" + viewCount + ", \"likeCnt\":"
+				+ likeCount + ", \"commentCnt\":\"" + commentCount + "\", \"isLiked\":" + isLiked + ", \"isMine\":" + isMine +"}";
+	}
+
+	
+	
 	
 }
 

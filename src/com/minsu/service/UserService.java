@@ -97,7 +97,7 @@ public class UserService {
 					userRequestDto.getUserId(),
 					// 비밀번호 암호화
 					encryptePassword(userRequestDto.getUserPassword()));
-	        if(userResponseDto!=null)return new ResponseDto(ResponseStatus.SUCCESS);
+	        if(userResponseDto!=null)return new ResponseDto<UserResponseDto>(ResponseStatus.SUCCESS, userResponseDto);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 	        return new ResponseDto(ResponseStatus.FAIL);

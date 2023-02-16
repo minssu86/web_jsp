@@ -5,11 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <title>board detail</title>
-
-    <!-- global css -->
-    <link rel="stylesheet" href="../css/global.css">
     <!-- local css -->
     <link rel="stylesheet" href="../css/board_detail.css">
+    <!-- global css & javascript -->
+    <jsp:include page="../template/global.jsp"></jsp:include>
+    <!-- local javascript -->
+    <script type="text/javascript" src="../js/board_detail.js"></script>
 </head>
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
@@ -186,11 +187,11 @@
                 </div>
                 <div>
                     <div>
-                        <a>수정</a>
-                        <a>삭제</a>
+                        <a id="btn-edit-board">수정</a>
+                        <a id="btn-delete-board">삭제</a>
                     </div>
                     <div>
-                        <a>목록</a>
+                        <a href="list.jsp">목록</a>
                         <a>
                             맨 위로
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -204,7 +205,7 @@
                                 </defs>
                             </svg>
                         </a>
-                        <a>
+                        <a href="write.jsp">
                             글쓰기
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_138_137)">

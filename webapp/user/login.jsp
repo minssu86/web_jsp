@@ -5,13 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
-
-    <!-- global css -->
-    <link rel="stylesheet" href="../css/global.css">
     <!-- local css -->
     <link rel="stylesheet" href="../css/login.css">
-    <!-- global javascript -->
-    <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+    <!-- global css & javascript -->
+    <jsp:include page="../template/global.jsp"></jsp:include>
     <!-- login javascript -->
     <script type="text/javascript" src="../js/login.js"></script>
 </head>
@@ -20,7 +17,7 @@
 <main>
     <section>
         <h2>로그인</h2>
-        <form name="login" action="../v1/user/login" method="post">
+        <form name="login">
             <article id="basic-login">
                 <label>
                     <input id="input-id" type="text" name="id" placeholder="아이디를 입력해주세요"/>

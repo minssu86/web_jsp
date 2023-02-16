@@ -7,8 +7,8 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class EmailConfirmTokenSender {
-    private final String user = "bungle.master01@gmail.com";
-    private final String password = "vslepxljztmvmfkv";
+    private final String user = "";
+    private final String password = "";
 
 
     private final Session session;

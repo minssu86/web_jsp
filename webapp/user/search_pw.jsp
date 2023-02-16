@@ -5,11 +5,10 @@
 <head>
   <meta charset="UTF-8">
   <title>search-pw</title>
-
-  <!-- global css -->
-  <link rel="stylesheet" href="../css/global.css">
   <!-- local css -->
   <link rel="stylesheet" href="../css/search.css">
+  <!-- global css & javascript -->
+  <jsp:include page="../template/global.jsp"></jsp:include>
 </head>
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>

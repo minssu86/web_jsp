@@ -8,6 +8,8 @@ import com.minsu.dao.CommentDao;
 import com.minsu.dao.CommentLikeDao;
 import com.minsu.dto.BoardRequestDto;
 import com.minsu.dto.BoardResponseDto;
+import com.minsu.dto.ResponseDto;
+import com.minsu.dto.ResponseStatus;
 
 public class BoardService {
 
@@ -24,15 +26,17 @@ public class BoardService {
 	}
 	
 	// 게시글 작성
-	public String createBoard(int userSeq, BoardRequestDto boardRequestDto) {
+	public ResponseDto<?> createBoard(int userSeq, BoardRequestDto boardRequestDto) {
 		boolean isSuccess = boardDao.save(boardRequestDto,userSeq);
-		if(isSuccess)return "성공";
-		return "실패";
+		if(isSuccess)return new ResponseDto(ResponseStatus.SUCCESS);
+		return new ResponseDto(ResponseStatus.FAIL);
 	}
 	
 	// 게시글 리스트 조회
-	public List<BoardResponseDto> getBoardList(int page, int size) {
-		return boardDao.findAll(page-1, size);
+	public ResponseDto getBoardList(BoardRequestDto boardRequestDto) {
+		List<BoardResponseDto> boardResponseDtos = boardDao.findAll(boardRequestDto.getPage()-1, boardRequestDto.getSize());
+		if(boardResponseDtos.size()>0)return new ResponseDto<List<BoardResponseDto>>(ResponseStatus.SUCCESS, boardResponseDtos);
+		return new ResponseDto(ResponseStatus.FAIL);
 	}
 	
 	// 게시글 상세 페이지 조회
@@ -48,14 +52,14 @@ public class BoardService {
 	}
 	
 	// 게시글 삭제
-	public String deleteBoard(int brdSeq, int userSeq) {
-		String cmtArrStr = commentDao.findAllCmt(brdSeq);
-		System.out.println(cmtArrStr);
+	public ResponseDto deleteBoard(BoardRequestDto boardRequestDto, int userSeq) {
+		String cmtArrStr = commentDao.findAllCmt(boardRequestDto.getBrdSeq());
+		System.out.println("delete service : " + cmtArrStr);
 		commentLikeDao.deleteAll(cmtArrStr);
-		commentDao.deleteAll(brdSeq);
-		boolean isSuccess = boardDao.delete(brdSeq, userSeq);
-		if(isSuccess)return "성공";
-		return "실패";
+		commentDao.deleteAll(boardRequestDto.getBrdSeq());
+		boolean isSuccess = boardDao.delete(boardRequestDto.getBrdSeq(), userSeq);
+		if(isSuccess)return new ResponseDto(ResponseStatus.SUCCESS);
+		return new ResponseDto(ResponseStatus.FAIL);
 	}
 	
 	// 게시글 추천

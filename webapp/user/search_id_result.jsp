@@ -5,13 +5,10 @@
 <head>
   <meta charset="UTF-8">
   <title>search-id-result</title>
-
-  <!-- global css -->
-  <link rel="stylesheet" href="../css/global.css">
   <!-- local css -->
   <link rel="stylesheet" href="../css/search_id_result.css">
-  <!-- global javascript -->
-  <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+  <!-- global css & javascript -->
+  <jsp:include page="../template/global.jsp"></jsp:include>
   <!-- login javascript -->
   <script type="text/javascript" src="../js/search_id_result.js"></script>
 </head>

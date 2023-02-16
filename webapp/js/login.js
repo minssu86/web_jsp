@@ -1,4 +1,5 @@
-const sucess = 'SUCCESS';
+const success = 'SUCCESS';
+
 $(function(){
 
     $('#btn-login').click(function(){
@@ -22,15 +23,21 @@ $(function(){
                 type : 'post',
                 data : formData,
                 dataType : "json",
-                success : function(data){
-                    if(data.status===sucess){
+                success : function(result){
+                    if(result.status===success){
+                        window.localStorage.clear();
+                        let userToken = $.cookie('userSession');
+                        let userInfo = new Object;
+                        userInfo.userSeq = result.data.userSeq;
+                        userInfo.userNickname = result.data.userNickname;
+                        userInfo = JSON.stringify(userInfo);
+                        window.localStorage.setItem(userToken,userInfo)
                         alert("로그인 성공! 환영합니다!");
                         location.href="../board/list.jsp";
                     }else{
                         alert("로그인 실패! 입력 확인 바랍니다");
                         return;
                     }
-                    console.log(data.status);
                 }
             });
 

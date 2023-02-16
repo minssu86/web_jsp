@@ -5,14 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>signup</title>
-    <!-- global css -->
-    <link rel="stylesheet" href="../css/global.css">
     <!-- local css -->
     <link rel="stylesheet" href="../css/signup.css">
-    <style rel="stylesheet">
-    </style>
-    <!-- global javascript -->
-    <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+    <!-- global css & javascript -->
+    <jsp:include page="../template/global.jsp"></jsp:include>
     <!-- singup javascript -->
     <script type="text/javascript" src="../js/singup.js"></script>
 </head>

@@ -5,13 +5,10 @@
 <head>
   <meta charset="UTF-8">
   <title>edit-pw</title>
-
-  <!-- global css -->
-  <link rel="stylesheet" href="../css/global.css">
   <!-- local css -->
   <link rel="stylesheet" href="../css/edit_pw.css">
-  <style rel="stylesheet">
-  </style>
+  <!-- global css & javascript -->
+  <jsp:include page="../template/global.jsp"></jsp:include>
 </head>
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>

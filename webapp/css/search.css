@@ -19,7 +19,6 @@ main > section > form {
     width: 100%;
     height: 310px;
 }
-main > section > form > article {}
 main > section > form > article > ul {
     /* 회원 가입 항목 리스트 */
     list-style: none;

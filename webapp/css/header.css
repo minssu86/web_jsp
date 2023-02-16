@@ -163,7 +163,7 @@ header > section > nav > ul a {
     width: 100%;
     font-size: calc(16em/14);
     font-weight: 700;
-    float: top;
+    /* float: top; */
     text-align: center;
     line-height: 52px;
     display: inline-block;
