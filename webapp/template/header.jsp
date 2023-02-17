@@ -43,10 +43,10 @@
                     <a href="../board/write.jsp">write</a>
                     <div class="under-bar"></div>
                 </li>
-                <li>
-                    <a href="../board/edit.jsp">Edit</a>
+                <!-- <li>
+                    <a href="#"></a>
                     <div class="under-bar"></div>
-                </li>
+                </li> -->
                 <!-- <li>
                     <a href="#">BOARD3</a>
                     <div class="under-bar"></div>

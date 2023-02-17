@@ -213,9 +213,6 @@ main > section > article:last-child > div > div:first-child > div:first-child > 
     height: 30px;
     color: #1E1E20;
 }
-main > section > article:last-child > div > div:first-child > div:first-child > div:first-child div > svg {
-    /* 최상단 댓글 작성 섹션 - 아이콘 */
-}
 main > section > article:last-child > div > div:first-child > div:first-child > div:first-child div > span {
     /* 최상단 댓글 작성 섹션 - 댓글 갯수 텍스트 */
     font-size: calc(20em/14);
@@ -309,6 +306,7 @@ main > section > article:last-child > div > div:first-child > div:last-child {
     margin: 0 auto;
     padding-bottom: 80px;
     top: 60px;
+    z-index: 0;
 }
 main > section > article:last-child > div > div:last-child{
     /* 댓글 하단 버튼부 */
@@ -335,7 +333,10 @@ main > section > article:last-child > div > div:last-child > div:first-child > a
     font-size: calc(16em/14);
     color: #1E1E20;
     text-align: center;
-    line-height: 44px;
+    line-height: 44px;    
+    z-index: 6;
+    position: relative;
+    cursor: pointer;
 }
 main > section > article:last-child > div > div:last-child > div:last-child {
     /* 댓글 하단 오른쪽 버튼부 */

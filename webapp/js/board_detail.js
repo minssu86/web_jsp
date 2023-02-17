@@ -1,10 +1,9 @@
 $(function(){
+    $('#btn-delete-board').css({'z-index':'6','position':'relative'});
     let urlstr = window.location.href;
     let url = new URL(urlstr);
     let brdSeq = url.searchParams.get("brdSeq");
   
-    console.log(brdSeq);
-
     // $.getJSON('../v1/board/'+brdSeq, function(result){
     //     if(result.status===success){
     //         let data = result.data;
@@ -18,11 +17,7 @@ $(function(){
     $('#btn-edit-board').click(function(){
 
     });
-
-    $('#btn-delete-board')
-    .css({'cursor': 'pointer'})
-    .click(function(){
-
+    $('#btn-delete-board').click(function(){
         let formData = {
             "brdSeq" : brdSeq
         }

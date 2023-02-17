@@ -111,7 +111,6 @@ public class UserService {
         // 유저 정보 확인
     	System.out.println(userRequestDto.toString());
     	UserResponseDto userResponseDto = userDao.findByUserNameAndUserEmail(userRequestDto.getUserName(), userRequestDto.getUserEmail());
-        System.out.println(userResponseDto.toString());
     	if(userResponseDto!=null){
         	// 인증 코드 생성
             String checkCode = createCheckCode();
