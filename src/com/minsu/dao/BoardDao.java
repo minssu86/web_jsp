@@ -115,7 +115,7 @@ public class BoardDao {
                 + "(SELECT l.brd_seq FROM board_like l "
                 + "WHERE l.brd_seq = b.brd_seq AND l.user_seq = ? LIMIT 1 ) as 'is_liked' " +
                 "FROM board b " +
-                "INNER JOIN  member m " +
+                "LEFT JOIN member m " +
                 "ON b.user_seq = m.user_seq " +
                 "WHERE b.brd_seq = ?";
         try (
@@ -175,6 +175,7 @@ public class BoardDao {
                 Connection conn = connectSql.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql);
         ) {
+        	System.out.println(brdSeq + ":" + userSeq);
             stmt.setInt(1, brdSeq);
             stmt.setInt(2, userSeq);
             return stmt.executeUpdate() > 0;

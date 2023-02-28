@@ -188,7 +188,8 @@ public class CommentDao {
 			while(rs.next()){
 				result += rs.getString("cmt_seq") + ",";
 			}
-			return result.substring(0,result.length()-1);
+			if(!result.equals(""))
+				return result.substring(0,result.length()-1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -200,6 +201,6 @@ public class CommentDao {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return result;
 	}
 }

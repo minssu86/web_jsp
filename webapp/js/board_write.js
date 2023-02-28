@@ -1,4 +1,4 @@
-const sucess = 'SUCCESS';
+const success = 'SUCCESS';
 $(function() {
     $('.btn').css({'cursor': 'pointer'});
     // 비회원 접근 방지
@@ -39,7 +39,7 @@ $(function() {
             data : formData,
             dataType : "json",
             success : function(result){
-                if(result.status==sucess){
+                if(result.status==success){
                     alert("게시글 작성 완료");
                     location.href="../board/list.jsp";
                 } else {

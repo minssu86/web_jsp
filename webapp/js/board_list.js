@@ -4,7 +4,6 @@ let page = 1;
 let size = 12;
 $(function() {
     $('.btn').css({"text-decoration":"none"})
-    console.log("저장 확인 1")
     $.getJSON('../v1/board?page='+page+'&size='+size, function(result){
         if(result.status===success){
             let data = result.data;

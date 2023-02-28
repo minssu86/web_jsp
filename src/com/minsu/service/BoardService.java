@@ -40,8 +40,10 @@ public class BoardService {
 	}
 	
 	// 게시글 상세 페이지 조회
-	public BoardResponseDto getBoard(int brdSeq, int userSeq) {
-		return boardDao.findById(brdSeq, userSeq);
+	public ResponseDto getBoard(BoardRequestDto boardRequestDto, int userSeq) {
+		BoardResponseDto boardResponseDto = boardDao.findById(boardRequestDto.getBrdSeq(), userSeq);
+		if(boardResponseDto!=null)return new ResponseDto<BoardResponseDto>(ResponseStatus.SUCCESS, boardResponseDto);
+		return new ResponseDto(ResponseStatus.FAIL);
 	}
 	
 	// 게시글 수정
@@ -58,6 +60,7 @@ public class BoardService {
 		commentLikeDao.deleteAll(cmtArrStr);
 		commentDao.deleteAll(boardRequestDto.getBrdSeq());
 		boolean isSuccess = boardDao.delete(boardRequestDto.getBrdSeq(), userSeq);
+		System.out.println(isSuccess);
 		if(isSuccess)return new ResponseDto(ResponseStatus.SUCCESS);
 		return new ResponseDto(ResponseStatus.FAIL);
 	}

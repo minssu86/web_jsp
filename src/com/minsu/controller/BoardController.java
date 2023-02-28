@@ -19,11 +19,10 @@ import com.minsu.service.BoardService;
 
 public class BoardController extends HttpServlet {
 
-	private static final String UNTIL_VERSION = "/web_jsp/v1/board";
-	private static final String GET_DETAIL = "/web_jsp/v1/board/*";
-//	private static final String DELETE = "/web_jsp/v1/board";
+	private static final String UNTIL_VERSION = "/web_jsp/v1/board"; // board list
+	private static final String GET_DETAIL = "/web_jsp/v1/board/detail";
 	public static Map<String, UserResponseDto> sessionStore = new HashMap<>();
-	
+	private ResponseDto responseDto = new ResponseDto();
 	private final BoardService boardService;
 	public BoardController() {
 		this.boardService = new BoardService();
@@ -33,16 +32,14 @@ public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		BoardRequestDto boardRequestDto = setRequestDto(req);
-		ResponseDto responseDto = new ResponseDto();
 		System.out.println(uri);
 		try {
 			switch (uri) {
-			case UNTIL_VERSION: 
+			case UNTIL_VERSION:  // 게시글 리스트
 				responseDto = boardService.getBoardList(boardRequestDto);
 			break;
-			case GET_DETAIL: 
-				System.out.println("도착");
-//				responseDto = boardService.getBoardList(boardRequestDto);
+			case GET_DETAIL:  // 게시글 상세페이지
+				responseDto = boardService.getBoard(boardRequestDto, userInfo(req));
 			break;
 						
 			default:
@@ -58,16 +55,14 @@ public class BoardController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		BoardRequestDto boardRequestDto = setRequestDto(req);
-		ResponseDto<?> responseDto = new ResponseDto();
 		switch (uri) {
-		case UNTIL_VERSION: 
+		case UNTIL_VERSION: // 게시글 작성
 			int userSeq = userInfo(req);
 			if(userSeq>0) {
 				responseDto = boardService.createBoard(userSeq, boardRequestDto);
 			} else {
 				responseDto.setStatus(ResponseStatus.FAIL);
 			}
-		System.out.println("1");
 		break;
 		default:
 			break;
@@ -79,13 +74,12 @@ public class BoardController extends HttpServlet {
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		BoardRequestDto boardRequestDto = setRequestDto(req);
-		ResponseDto responseDto = new ResponseDto();
 		System.out.println(uri);
 		try {
 			switch (uri) {
-			case UNTIL_VERSION: 
-				int userSeq = userInfo(req);
-				responseDto = boardService.deleteBoard(boardRequestDto, userSeq);
+			case UNTIL_VERSION:  // 게시글 삭제
+				System.out.println("request:::"+boardRequestDto.getBrdSeq()+":"+userInfo(req));
+				responseDto = boardService.deleteBoard(boardRequestDto, userInfo(req));
 			break;
 						
 			default:
@@ -110,7 +104,6 @@ public class BoardController extends HttpServlet {
 //			break;
 //		}
 //	}
-	
 	
 
 	private int userInfo(HttpServletRequest req) {
@@ -138,6 +131,7 @@ public class BoardController extends HttpServlet {
 		resp.setContentType("application/json; charset=utf-8");		
 		resp.setHeader("Access-Control-Allow", "*");
 //		resp.setStatus();
+		System.out.println(responseDto.getStatus().toString());
 		try(PrintWriter out = resp.getWriter();){
 			// 상태 코드 반환
 			out.print("{\"status\":");

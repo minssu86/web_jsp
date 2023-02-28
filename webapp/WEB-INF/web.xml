@@ -19,6 +19,7 @@
   </context-param>
   
   
+  
   <servlet>
   	<servlet-name>user</servlet-name>
   	<servlet-class>com.minsu.controller.UserController</servlet-class>

@@ -1,4 +1,4 @@
-const sucess = 'SUCCESS';
+const success = 'SUCCESS';
 let isCheckedId = false; // 아이디 중복
 let isCheckedNickname = false; // 닉네임 중복
 let isCheckedEmail = false; // 이메일 중복
@@ -95,7 +95,7 @@ $(function(){
         }
         $.getJSON('../v1/user/duplication/id?id='+id,function(data){
             let result = data.status;
-            if(result==sucess){
+            if(result==success){
                 isCheckedId = true;
                 alert("사용 가능 : 모달로 바꿔야함!")
             } else {
@@ -113,7 +113,7 @@ $(function(){
         }
         $.getJSON('../v1/user/duplication/nickname?nickname='+nickname,function(data){
             let result = data.status;
-            if(result==sucess){
+            if(result==success){
                 isCheckedNickname = true;
                 $('#result-nick-check').text('사용 가능');
                 $('#result-nick-check').css({'color':'green'});
@@ -133,7 +133,7 @@ $(function(){
         }
         $.getJSON('../v1/user/duplication/email?email='+email,function(data){
             let result = data.status;
-            if(result==sucess){
+            if(result==success){
                 isCheckedEmail = true;
                 alert("사용 가능 : 모달로 바꿔야함!")
             } else {
