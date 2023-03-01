@@ -66,6 +66,7 @@ main > section > table > tfoot div:first-child {
     float: left;
 }
 main > section > table > tfoot div:first-child > ul {
+    width: 703px;
     position: relative;
     float: right;
     height: 100%;
@@ -74,7 +75,7 @@ main > section > table > tfoot div:first-child > ul {
 main > section > table > tfoot div:first-child  li {
     width: 32px;
     height: 32px;
-    margin: 14px 8px;
+    margin: 14px 6px;
     text-align: center;
     line-height: 32px;
 }
@@ -94,7 +95,8 @@ main > section > table > tfoot div:last-child > a {
     background: #804C4C;
     border-radius: 4px;
     display: block;
-    margin: 8px auto;
+    margin:
+     8px auto;
     line-height: 44px;
     text-align: center;
     font-weight: 500;
@@ -102,17 +104,8 @@ main > section > table > tfoot div:last-child > a {
     color: #FFFFFF;
 }
 
-main > section > table > tfoot div:first-child li:nth-child(1),
-main > section > table > tfoot div:first-child li:nth-child(2),
-main > section > table > tfoot div:first-child li:nth-child(13),
-main > section > table > tfoot div:first-child li:nth-child(14){
+main > section > table > tfoot div:first-child .svg-page{
     background-color: #FFFFFF;
-    border: 1px solid #EAEAEC;
-    border-radius: 16px;
-}
-main > section > table > tfoot div:first-child li:nth-child(3){
-    background-color: #804C4C;
-    color: #FFFFFF;
     border: 1px solid #EAEAEC;
     border-radius: 16px;
 }

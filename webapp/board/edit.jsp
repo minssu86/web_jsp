@@ -16,7 +16,7 @@
 <jsp:include page="../template/header.jsp"></jsp:include>
 <main>
   <section>
-    <form name="board-write" action="#">
+    <form name="board-write">
       <article>
         <h2>게시글 수정</h2>
         <div>
@@ -34,7 +34,7 @@
       <article>
         <div>
           <button type="reset">취소</button>
-          <button type="submit">수정 완료</button>
+          <button id="btn-edit-board" type="button">수정 완료</button>
         </div>
       </article>
     </form>

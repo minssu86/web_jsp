@@ -17,6 +17,8 @@ public class BoardResponseDto {
 	private boolean isLiked;
 	private boolean isMine;
 	
+	public BoardResponseDto() {};
+	
 	public BoardResponseDto(int brdSeq, String brdTitle, String userNickname, 
 			String createdAt, String modifiedAt, int brdViewCount, int brdLikeCount) {
 		this.brdSeq = brdSeq;

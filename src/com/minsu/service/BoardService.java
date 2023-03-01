@@ -34,8 +34,14 @@ public class BoardService {
 	
 	// 게시글 리스트 조회
 	public ResponseDto getBoardList(BoardRequestDto boardRequestDto) {
-		List<BoardResponseDto> boardResponseDtos = boardDao.findAll(boardRequestDto.getPage()-1, boardRequestDto.getSize());
-		if(boardResponseDtos.size()>0)return new ResponseDto<List<BoardResponseDto>>(ResponseStatus.SUCCESS, boardResponseDtos);
+		List<BoardResponseDto> boardResponseDtos = null;
+		if(boardRequestDto.getKeyword()==null) {
+			boardResponseDtos = boardDao.findAll(boardRequestDto.getPage()-1, boardRequestDto.getSize());
+		}else {
+			boardResponseDtos = boardDao.findAll(boardRequestDto.getPage()-1, boardRequestDto.getSize(), boardRequestDto.getKeyword());
+		}
+		int totalBoardCount = boardDao.countBoard();
+		if(boardResponseDtos.size()>0)return new ResponseDto<List<BoardResponseDto>>(ResponseStatus.SUCCESS, boardResponseDtos,totalBoardCount);
 		return new ResponseDto(ResponseStatus.FAIL);
 	}
 	
@@ -47,18 +53,17 @@ public class BoardService {
 	}
 	
 	// 게시글 수정
-	public String changeBoard(BoardRequestDto boardRequestDto, int brdSeq, int userSeq) {
-		boolean isSuccess = boardDao.update(brdSeq, userSeq, boardRequestDto);
-		if(isSuccess)return "성공";
-		return "실패";
+	public ResponseDto changeBoard(BoardRequestDto boardRequestDto, int userSeq) {
+		if(boardDao.update(boardRequestDto, userSeq))return new ResponseDto(ResponseStatus.SUCCESS);
+		return new ResponseDto(ResponseStatus.FAIL);
 	}
 	
 	// 게시글 삭제
 	public ResponseDto deleteBoard(BoardRequestDto boardRequestDto, int userSeq) {
 		String cmtArrStr = commentDao.findAllCmt(boardRequestDto.getBrdSeq());
-		System.out.println("delete service : " + cmtArrStr);
 		commentLikeDao.deleteAll(cmtArrStr);
 		commentDao.deleteAll(boardRequestDto.getBrdSeq());
+		boardLikeDao.deleteAll(boardRequestDto.getBrdSeq());
 		boolean isSuccess = boardDao.delete(boardRequestDto.getBrdSeq(), userSeq);
 		System.out.println(isSuccess);
 		if(isSuccess)return new ResponseDto(ResponseStatus.SUCCESS);
@@ -66,27 +71,34 @@ public class BoardService {
 	}
 	
 	// 게시글 추천
-	public String likeBoard(int brdSeq, int userSeq) {
-		boolean isBoardLikeSuccess = false;
+	public ResponseDto likeBoard(int userSeq, BoardRequestDto boardRequestDto) {
 		boolean isBoardUpdateSuccess = false;
-		
-		boolean isLike = boardLikeDao.find(brdSeq, userSeq);
+		BoardResponseDto boardResponseDto = new BoardResponseDto();
+		boolean isLike = boardLikeDao.find(boardRequestDto.getBrdSeq(), userSeq);
 		// 추천 이력이 있을때
 		if(isLike) {
-			isBoardUpdateSuccess = boardDao.updateLikeCount(brdSeq, -1);
+			isBoardUpdateSuccess = boardDao.updateLikeCount(boardRequestDto.getBrdSeq(), -1);
 			if(isBoardUpdateSuccess) {
-				boardLikeDao.delete(brdSeq, userSeq);
-				return "추천 다운";
+				boardLikeDao.delete(boardRequestDto.getBrdSeq(), userSeq);
+				boardResponseDto.setLikeCount(getLikeCount(boardRequestDto.getBrdSeq(), userSeq));
+				boardResponseDto.setLiked(false);
+				return new ResponseDto<BoardResponseDto>(ResponseStatus.SUCCESS, boardResponseDto);
 			}
 		} else {
 			// 추천 이력이 없을 때 
-			isBoardUpdateSuccess = boardDao.updateLikeCount(brdSeq, 1);
+			isBoardUpdateSuccess = boardDao.updateLikeCount(boardRequestDto.getBrdSeq(), 1);
 			if(isBoardUpdateSuccess) {
-				boardLikeDao.save(brdSeq, userSeq);
-				return "추천 업";
+				boardLikeDao.save(boardRequestDto.getBrdSeq(), userSeq);
+				boardResponseDto.setLikeCount(getLikeCount(boardRequestDto.getBrdSeq(), userSeq));
+				boardResponseDto.setLiked(true);
+				return new ResponseDto<BoardResponseDto>(ResponseStatus.SUCCESS, boardResponseDto);
 			}
 		}
-		return "실패";
+		return new ResponseDto(ResponseStatus.FAIL);
+	}
+	
+	private int getLikeCount(int brdSeq, int userSeq) {
+		return boardLikeDao.count(brdSeq, userSeq);
 	}
 	
 	// 키워드 검색

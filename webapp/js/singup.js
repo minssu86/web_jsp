@@ -12,7 +12,7 @@ $(function(){
     //비밀번호 입력 체크
     $('#signup-pw').keyup(function(){
         let input = $(this).val();
-        let lengthRegex = /^[A-Za-z0-9!@#$%]{8,20}$/;
+        let lengthRegex = /^[A-Za-z0-9!@#$%]{4,20}$/;
         let engRegex = /[A-Za-z]/;
         let digitRegex = /[0-9]/;
         let specRegex = /[!@#$%]/;

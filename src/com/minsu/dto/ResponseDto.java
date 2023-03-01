@@ -3,9 +3,15 @@ package com.minsu.dto;
 public class ResponseDto<T> {
 	private ResponseStatus status;
 	private T data;
+	private int totalBoardCount; 
 	
 	public ResponseDto(){
 		
+	}
+	public ResponseDto(ResponseStatus status, T data, int totalBoardCount){
+		this.status = status;
+		this.data = data;
+		this.totalBoardCount = totalBoardCount;
 	}
 	public ResponseDto(ResponseStatus status, T data){
 		this.status = status;
@@ -27,5 +33,14 @@ public class ResponseDto<T> {
 	public void setData(T data) {
 		this.data = data;
 	}
+	public int getTotalBoardCount() {
+		return totalBoardCount;
+	}
+	@Override
+	public String toString() {
+		return "ResponseDto [status=" + status + ", data=" + data + ", totalBoardCount=" + totalBoardCount + "]";
+	}
+	
+	
 	
 }

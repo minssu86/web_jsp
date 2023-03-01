@@ -31,14 +31,14 @@
                         <label for="signup-pw">
                             비밀번호
                         </label>
-                        <input id="signup-pw" name="password" type="password" placeholder="비밀번호를 입력해주세요" minlength="8" maxlength="20">
+                        <input id="signup-pw" name="password" type="password" placeholder="비밀번호를 입력해주세요" minlength="4" maxlength="20">
                         <div><h3 id="result-pw-check">영문/숫자/특수문자 중 2가지 이상, 8자 이상 20자 이하</h3></div>
                     </li>
                     <li>
                         <label for="signup-check">
                             비밀번호 확인
                         </label>
-                        <input id="signup-check" name="passwordchek" type="password" placeholder="비밀번호를 한번 더 입력해주세요" minlength="8">
+                        <input id="signup-check" name="passwordchek" type="password" placeholder="비밀번호를 한번 더 입력해주세요" minlength="4">
                         <div><h3 id="result-pw-same-check">비밀번호가 일치하지 않습니다</h3></div>
                     </li>
                     <li>

@@ -6,6 +6,7 @@ public class BoardRequestDto {
 	private String brdContent;
 	private int page;
 	private int size;
+	private String keyword;
 	
 	public int getBrdSeq() {
 		return brdSeq;
@@ -39,13 +40,17 @@ public class BoardRequestDto {
 		this.size = size;
 	}
 	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	
 	@Override
 	public String toString() {
 		return "BoardRequestDto [brdSeq=" + brdSeq + ", brdTitle=" + brdTitle + ", brdContent=" + brdContent + ", page="
-				+ page + ", size=" + size + "]";
+				+ page + ", size=" + size + ", keyword=" + keyword + "]";
 	}
-	
-	
-	
 	
 }

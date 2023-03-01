@@ -1,9 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="../css/header.css">
+<script>
+        $(function(){
+
+            $('#input-search-keyword').keydown(function(key){
+                if(key.keyCode==13){
+                    let keyword = $('#input-search-keyword').val();
+                    keyword = keyword.trim();
+                    if(keyword==""){
+                        alert("검색어를 입력하세요");
+                        return
+                    }
+                    location.href="../board/list.jsp?keyword="+keyword;
+                }
+            });
+
+        })
+</script>
 <header>
     <aside>
-        <h1>로고</h1>
+        <h1><a href="../board/list.jsp">로고</a></h1>
     </aside>
     <section>
         <article>
@@ -21,7 +38,7 @@
                         </defs>
                     </svg>
                     <label>
-                        <input type="text" placeholder="검색어를 입력해주세요.">
+                        <input id="input-search-keyword" type="text" placeholder="검색어를 입력해주세요.">
                     </label>
                 </div>
             </div>

@@ -7,7 +7,7 @@ $(function(){
         let id = $('#input-id').val();
         let password = $('#input-password').val();
 
-        let passwordCheckRegex = /^[A-Za-z0-9!@#$%]{8,20}$/;
+        let passwordCheckRegex = /^[A-Za-z0-9!@#$%]{4,20}$/;
 
         if(id==''){
             alert("아이디를 입력해주세요");

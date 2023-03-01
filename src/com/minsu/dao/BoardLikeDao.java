@@ -33,9 +33,8 @@ public class BoardLikeDao {
     }
 
     public boolean save(int brdSeq, int userSeq) {
-        int resultCount = 0;
-        String sql = "INSERT INTO board_like(brd_seq, user_seq) "
-                + "VALUES(" + brdSeq + ", " + userSeq + ") ";
+    	System.out.println("brdSeq: "+brdSeq+", userSeq: "+userSeq );
+        String sql = "INSERT INTO board_like(brd_seq, user_seq) VALUES(?, ?)";
         try (
                 Connection conn = connectSql.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql);
@@ -64,6 +63,41 @@ public class BoardLikeDao {
         }
         return false;
     }
+
+	public int count(int brdSeq, int userSeq) {
+        String sql = "SELECT count(brd_seq) FROM board_like "
+                + "WHERE brd_seq = ? AND user_seq = ? ";
+        try (
+                Connection conn = connectSql.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+            stmt.setInt(1, brdSeq);
+            stmt.setInt(2, userSeq);
+            try (
+                    ResultSet rs = stmt.executeQuery();
+            ) {
+                if(rs.next())return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+	}
+
+	public boolean deleteAll(int brdSeq) {
+        String sql = "DELETE FROM board_like" +
+                " WHERE brd_seq = ? ";
+        try (
+                Connection conn = connectSql.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+            stmt.setInt(1, brdSeq);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+	}
 
 
 }

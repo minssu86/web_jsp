@@ -70,19 +70,20 @@ public class BoardDao {
     }
 
     public List<BoardResponseDto> findAll(int page, int size, String keyword) {
+    	System.out.println("오나??");
         List<BoardResponseDto> boardResponseDtos = new ArrayList<BoardResponseDto>();
         String sql = "SELECT b.brd_seq, b.brd_title, b.created_at, b.modified_at, b.brd_view_count, b.brd_like_count, m.user_nickname "
                 + "FROM board b "
                 + "INNER JOIN member m "
                 + "ON b.user_seq = m.user_seq "
-                + "WHERE brd_title LIKE '%?%' or brd_content LIKE '%?%' "
+                + "WHERE brd_title LIKE ? or brd_content LIKE ? "
                 + "ORDER BY b.brd_seq DESC LIMIT ? OFFSET ?";
         try (
                 Connection conn = connectSql.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql);
         ) {
-            stmt.setString(1, keyword);
-            stmt.setString(2, keyword);
+            stmt.setString(1, "%"+keyword+"%");
+            stmt.setString(2, "%"+keyword+"%");
             stmt.setInt(3, size);
             stmt.setInt(4, page);
             try (
@@ -149,7 +150,7 @@ public class BoardDao {
         return null;
     }
 
-    public boolean update(int brdSeq, int userSeq, BoardRequestDto boardRequestDto) {
+    public boolean update(BoardRequestDto boardRequestDto, int userSeq) {
         String sql = "UPDATE board" +
                 " SET modified_at = now(),  brd_title=? , brd_content=? " +
                 " WHERE brd_seq=? and user_seq=? ";
@@ -159,7 +160,7 @@ public class BoardDao {
         ) {
             stmt.setString(1, boardRequestDto.getBrdTitle());
             stmt.setString(2, boardRequestDto.getBrdContent());
-            stmt.setInt(3, brdSeq);
+            stmt.setInt(3, boardRequestDto.getBrdSeq());
             stmt.setInt(4, userSeq);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -219,4 +220,18 @@ public class BoardDao {
         }
         return false;
     }
+
+	public int countBoard() {
+        String sql = "select count(brd_seq) from board ";
+        try (
+                Connection conn = connectSql.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+        		ResultSet rs = stmt.executeQuery();
+        ) {
+        	if(rs.next())return rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		return 0;
+	}
 }

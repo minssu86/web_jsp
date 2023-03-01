@@ -14,7 +14,7 @@ header > aside {
     float: left;
 }
 
-header > aside > h1 {
+header > aside > h1 > a{
     /* 로고 */
     position: relative;
     width: 68%;
@@ -23,6 +23,7 @@ header > aside > h1 {
     font-size: calc(80em/14);
     line-height: 175%;
     color: #804C4C;
+    text-decoration: none;
 }
 
 header > section {
