@@ -4,7 +4,7 @@ $(function() {
     // 비회원 접근 방지
     if(userSeq==null){
         alert("로그인이 필요한 서비스입니다.");
-        location.href='../user/login.jsp';
+        location.href='../user/login.html';
     }
 
     $('#btn-back').click(function(){
@@ -34,14 +34,14 @@ $(function() {
         }
 
         $.ajax({
-            url : '../v1/board',
+            url : beUrl+'/v1/board',
             type : 'post',
             data : formData,
             dataType : "json",
             success : function(result){
                 if(result.status==success){
                     alert("게시글 작성 완료");
-                    location.href="../board/list.jsp";
+                    location.href="../board/list.html";
                 } else {
                     alert("오류 발생! 관리자에게 문의 하세요(code:bw1)");
                 }

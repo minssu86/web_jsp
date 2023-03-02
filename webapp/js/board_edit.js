@@ -4,12 +4,12 @@ $(function(){
      // 비회원 접근 방지
      if(userSeq==null){
         alert("로그인이 필요한 서비스입니다.");
-        location.href='../user/login.jsp';
+        location.href='../user/login.html';
     }
     let urlstr = window.location.href;
     let url = new URL(urlstr);
     let brdSeq = url.searchParams.get("brdSeq");
-    $.getJSON('../v1/board/detail?brdSeq='+brdSeq, function(result){
+    $.getJSON(beUrl+'/v1/board/detail?brdSeq='+brdSeq, function(result){
         if(result.status===success){
             let data = result.data;
             $('#write-title').val(data.title);
@@ -36,13 +36,13 @@ $(function(){
             "content" : content
         };
         $.ajax({
-            url : '../v1/board/edit?brdSeq='+brdSeq,
+            url : beUrl+'/v1/board/edit?brdSeq='+brdSeq,
             type : 'post',
             data : data,
             dataType : "json",
             success : function(result){
                 if(result.status==success){
-                  location.href="detail.jsp?brdSeq="+brdSeq;
+                  location.href="detail.html?brdSeq="+brdSeq;
                 } else {
                     alert("오류 발생! 관리자에게 문의 하세요(code:bw1)");
                 }

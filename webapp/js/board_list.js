@@ -22,9 +22,9 @@ $(function() {
 
         let requestUrl;
         if(keyword==undefined){
-            requestUrl = '../v1/board?page='+page+'&size='+size;
+            requestUrl = beUrl+'/v1/board?page='+page+'&size='+size;
         }else{
-            requestUrl = '../v1/board?page='+page+'&size='+size+'&keyword='+keyword;
+            requestUrl = beUrl+'/v1/board?page='+page+'&size='+size+'&keyword='+keyword;
         }
 
         $.getJSON(requestUrl, function(result){
@@ -41,7 +41,7 @@ $(function() {
                     .append($('<td/>').html(brd.likeCnt))
                     .css({'cursor': 'pointer'})
                     .click(function(){
-                        location.href="detail.jsp?brdSeq="+brd.seq;
+                        location.href="detail.html?brdSeq="+brd.seq;
                     })
                 .appendTo('.tbody-list')
                 })

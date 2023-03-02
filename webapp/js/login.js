@@ -17,23 +17,24 @@ $(function(){
                 "id" : id,
                 "password" : password,
             }
-
             $.ajax({
-                url : '../v1/user/login',
+                url : beUrl+'/v1/user/login',
                 type : 'post',
                 data : formData,
                 dataType : "json",
+                xhrFields : {withCredentials : true},
                 success : function(result){
                     if(result.status===success){
                         window.localStorage.clear();
                         let userToken = $.cookie('userSession');
+                        console.log(userToken);
                         let userInfo = new Object;
                         userInfo.userSeq = result.data.userSeq;
                         userInfo.userNickname = result.data.userNickname;
                         userInfo = JSON.stringify(userInfo);
                         window.localStorage.setItem(userToken,userInfo)
                         alert("로그인 성공! 환영합니다!");
-                        location.href="../board/list.jsp";
+                        // location.href="../board/list.html";
                     }else{
                         alert("로그인 실패! 입력 확인 바랍니다");
                         return;

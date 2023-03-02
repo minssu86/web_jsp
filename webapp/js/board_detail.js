@@ -9,7 +9,7 @@ $(function(){
     let brdSeq = url.searchParams.get("brdSeq");
 
     // 상세 정보 요청
-    $.getJSON('../v1/board/detail?brdSeq='+brdSeq, function(result){
+    $.getJSON(beUrl+'/v1/board/detail?brdSeq='+brdSeq, function(result){
         if(result.status===success){
             let data = result.data;
             $('#h2-print-title').text(data.title);
@@ -38,7 +38,7 @@ $(function(){
             return;
         }
         $.ajax({
-            url : '../v1/board/like?brdSeq='+brdSeq,
+            url : beUrl+'/v1/board/like?brdSeq='+brdSeq,
             type : 'post',
             dataType : "json",
             success : function(result){
@@ -66,19 +66,19 @@ $(function(){
 
     // 수정 페이지 이동
     $('#btn-edit-board').click(function(){
-        location.href="edit.jsp?brdSeq="+brdSeq;
+        location.href="edit.html?brdSeq="+brdSeq;
     });
 
     // 게시글 삭제
     $('#btn-delete-board').click(function(){
         $.ajax({
-            url : '../v1/board?brdSeq='+brdSeq,
+            url : beUrl+'/v1/board?brdSeq='+brdSeq,
             type : 'delete',
             dataType : "json",
             success : function(result){
                 if(result.status==success){
                     alert("게시글 삭제 성공");
-                    location.href="../board/list.jsp";
+                    location.href="../board/list.html";
                 } else {
                     alert("오류 발생! 관리자에게 문의 하세요(code:bw1)");
                 }

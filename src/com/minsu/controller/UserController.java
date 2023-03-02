@@ -178,8 +178,13 @@ public class UserController extends HttpServlet {
 
 	// 응답 데이터 json 변환
 	private void responseData(HttpServletResponse resp, ResponseDto responseDto) throws IOException {
-		resp.setContentType("application/json; charset=utf-8");		
-		resp.setHeader("Access-Control-Allow", "*");
+		resp.setContentType("application/json; charset=utf-8");	
+		resp.setHeader("Access-Control-Allow-Origin", "*");
+
+		resp.setHeader("Access-Control-Allow-Credentials", "true");
+		resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		resp.setHeader("Access-Control-Max-Age", "3600");
+		resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
 		try(PrintWriter out = resp.getWriter();){
 			// 상태 코드 반환
 			out.print("{\"status\":");
@@ -207,6 +212,7 @@ public class UserController extends HttpServlet {
 		if(req.getParameter("email")!=null)userRequestDto.setUserEmail(req.getParameter("email"));
 		if(req.getParameter("profile")!=null)userRequestDto.setUserProfile(req.getParameter("profile"));
 		if(req.getParameter("checkcode")!=null)userRequestDto.setCheckCode(req.getParameter("checkcode"));
+		System.out.println(userRequestDto.toString());
 		return userRequestDto;
 	}
 	

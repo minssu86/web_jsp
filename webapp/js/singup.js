@@ -93,7 +93,7 @@ $(function(){
             alert("아이디를 입력하세요 : 모달로 바꿔야함!")
             return;
         }
-        $.getJSON('../v1/user/duplication/id?id='+id,function(data){
+        $.getJSON(beUrl+'/v1/user/duplication/id?id='+id,function(data){
             let result = data.status;
             if(result==success){
                 isCheckedId = true;
@@ -111,7 +111,7 @@ $(function(){
         if(nickname==''){
             alert("닉네임을 입력하세요 : 모달로 바꿔야함!")
         }
-        $.getJSON('../v1/user/duplication/nickname?nickname='+nickname,function(data){
+        $.getJSON(beUrl+'/v1/user/duplication/nickname?nickname='+nickname,function(data){
             let result = data.status;
             if(result==success){
                 isCheckedNickname = true;
@@ -131,7 +131,7 @@ $(function(){
         if(email==''){
             alert("이메일을 입력하세요 : 모달로 바꿔야함!")
         }
-        $.getJSON('../v1/user/duplication/email?email='+email,function(data){
+        $.getJSON(beUrl+'/v1/user/duplication/email?email='+email,function(data){
             let result = data.status;
             if(result==success){
                 isCheckedEmail = true;
@@ -145,7 +145,6 @@ $(function(){
 
     // 제출 전 마지막 체크
     $('#submit').click(function(){
-        console.log("??");
         let isPasswordSame = $('#signup-pw').val() == $('#signup-check').val;
         switch (false){
             case checkPassword :
@@ -177,14 +176,14 @@ $(function(){
         }
         console.log($('#signup-email').val())
         $.ajax({
-            url : '../v1/user/signup',
+            url : beUrl+'/v1/user/signup',
             type : 'post',
             data : formData,
             dataType : "json",
             success : function(data){
                 console.log("!!!")
                 alert("이메일을 통해 가입 절차를 완료하세요!");
-                location.href="login.jsp";
+                location.href="login.html";
             }
         });
     }); 
