@@ -107,7 +107,7 @@ public class BoardController extends HttpServlet {
 			switch (uri) {
 			case UNTIL_VERSION:  // 게시글 삭제
 				userSeq = userInfo(req);
-				userSeq=18;
+				userSeq=1;
 				responseDto = boardService.deleteBoard(boardRequestDto, userInfo(req));
 				break;
 			default:
