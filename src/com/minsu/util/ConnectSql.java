@@ -16,8 +16,8 @@ public class ConnectSql {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				conn=DriverManager.getConnection(
 						"jdbc:mysql://localhost:3306/jsp",
-						env.get("MYSQL_USER"),
-						env.get("MYSQL_PW"));
+						"scott",
+						"tiger");
 			}
 			
 		} catch (ClassNotFoundException e) {

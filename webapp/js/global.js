@@ -1,6 +1,6 @@
 $(function() {
 
-    beUrl="http://localhost:8080/web_jsp";
+    beUrl="http://192.168.99.101:8080/web_jsp";
 
     const userToken = $.cookie('userSession');
     let userInfo = window.localStorage.getItem(userToken);
