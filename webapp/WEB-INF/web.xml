@@ -17,8 +17,15 @@
   	<param-name>password</param-name>
   	<param-value>tiger</param-value>
   </context-param>
-  
-  
+
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>com.minsu.util.CorsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
   
   <servlet>
   	<servlet-name>user</servlet-name>

@@ -17,6 +17,7 @@ import com.minsu.dto.ResponseDto;
 import com.minsu.dto.ResponseStatus;
 import com.minsu.dto.UserResponseDto;
 import com.minsu.service.BoardService;
+import com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec;
 
 public class BoardController extends HttpServlet {
 
@@ -54,6 +55,8 @@ public class BoardController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
 		String uri = req.getRequestURI();
 		BoardRequestDto boardRequestDto = setRequestDto(req);
 		int userSeq = -1;
@@ -61,7 +64,7 @@ public class BoardController extends HttpServlet {
 			switch (uri) {
 			case UNTIL_VERSION: // 게시글 작성
 				userSeq = userInfo(req);
-				userSeq=18;
+				userSeq=1;
 				if(userSeq>0) {
 					responseDto = boardService.createBoard(userSeq, boardRequestDto);
 				} else {
@@ -70,7 +73,7 @@ public class BoardController extends HttpServlet {
 				break;
 			case IS_LIKE:  // 게시글 추천
 				userSeq = userInfo(req);
-				userSeq=18;
+				userSeq=1;
 				if(userSeq>0) {
 					responseDto = boardService.likeBoard(userSeq, boardRequestDto);
 				} else {
@@ -79,7 +82,7 @@ public class BoardController extends HttpServlet {
 				break;
 			case EDIT:  // 게시글 수정
 				userSeq = userInfo(req);
-				userSeq=18;
+				userSeq=1;
 				if(userSeq>0) {
 					responseDto = boardService.changeBoard(boardRequestDto, userSeq);
 				} else {
@@ -138,13 +141,14 @@ public class BoardController extends HttpServlet {
 	
 	// 응답 데이터 json 변환
 	private void responseData(HttpServletResponse resp, ResponseDto responseDto) throws IOException {
-		resp.setContentType("application/json; charset=utf-8");	
-		resp.setHeader("Access-Control-Allow-Origin", "*");	
 		
-		resp.setHeader("Access-Control-Allow-Credentials", "true");
-		resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-		resp.setHeader("Access-Control-Max-Age", "3600");
-		resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
+		resp.setContentType("application/json; charset=utf-8");	
+//		resp.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");	
+//		
+//		resp.setHeader("Access-Control-Allow-Credentials", "true");
+//		resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+//		resp.setHeader("Access-Control-Max-Age", "3600");
+//		resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
 		
 		
 		try(PrintWriter out = resp.getWriter();){

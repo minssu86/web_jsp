@@ -4,8 +4,8 @@ $(function() {
 
     const userToken = $.cookie('userSession');
     let userInfo = window.localStorage.getItem(userToken);
-    userSeq = 18;
-    userNickname = "테스트용";
+    userSeq = 1;
+    userNickname = "testNick";
     // if(userToken!=undefined){
     //     if(userInfo!=null){
     //         userInfo = JSON.parse(userInfo);
